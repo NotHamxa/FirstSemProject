@@ -25,6 +25,38 @@ MainPage::MainPage(QWidget *parent) : QWidget(parent) {
     // --- Menu Bar ---
     menuBar = new QMenuBar(this);
     menuBar->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+    menuBar->setStyleSheet(
+        "QMenuBar {"
+        "  background-color: #1f1f1f;"     /* dark background */
+        "  color: #f0f0f0;"                /* normal text color */
+        "  font-size: 14px;"
+        "  spacing: 6px;"                  /* spacing between menus */
+        "}"
+        "QMenuBar::item {"
+        "  background-color: transparent;"
+        "  padding: 4px 12px;"
+        "  border-radius: 4px;"
+        "}"
+        "QMenuBar::item:selected {"
+        "  background-color: #2a2a2a;"    /* hover highlight */
+        "}"
+        "QMenuBar::item:disabled {"
+        "  color: #555555;"                /* gray text for disabled actions */
+        "}"
+        "QMenu {"
+        "  background-color: #1f1f1f;"
+        "  color: #f0f0f0;"
+        "  border: 1px solid #2a2a2a;"
+        "}"
+        "QMenu::item:selected {"
+        "  background-color: #4CAF50;"     /* highlight for selected menu item */
+        "  color: #ffffff;"
+        "}"
+        "QMenu::item:disabled {"
+        "  color: #555555;"                /* gray for disabled menu items */
+        "}"
+    );
+
 
     // File Menu
     fileMenu = menuBar->addMenu("File");
