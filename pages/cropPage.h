@@ -28,23 +28,23 @@ private slots:
     void onApplyCrop();
     void onStartSliderChanged(int);
     void onEndSliderChanged(int);
-
+    void back();
 private:
     int startSample() const;
     int endSample() const;
 
-    AppData* appData = nullptr;
-    AudioHistory* history = nullptr;
+    AppData* appData;
+    AudioHistory* history;
 
-    AudioPlayer* player = nullptr;
+    AudioPlayer* player;
     std::function<void(QString)> changeWindow;
 
-    QSlider* startSlider = nullptr;
-    QSlider* endSlider = nullptr;
+    QSlider* startSlider;
+    QSlider* endSlider;
 
-    QLabel* rangeLabel = nullptr;
-    QPushButton* playButton = nullptr;
-    QPushButton* applyButton = nullptr;
+    QLabel* rangeLabel;
+    QPushButton* playButton ;
+    QPushButton* applyButton;
 
     int currentSample = 0;
     bool playing = false;

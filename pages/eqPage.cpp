@@ -9,6 +9,11 @@ EqPage::EqPage(QWidget* parent)
 {
     auto* root = new QVBoxLayout(this);
 
+    auto* title = new QLabel("Audio Equalizer", this);
+    title->setAlignment(Qt::AlignCenter);
+    title->setStyleSheet("font-size: 22px; font-weight: bold;");
+    root->addWidget(title);
+
     // --- Waveform Canvas at the top ---
     canvas = new WaveformCanvas(this);
     root->addWidget(canvas);
@@ -28,10 +33,39 @@ EqPage::EqPage(QWidget* parent)
     auto* back = new QPushButton("Back");
     auto* apply = new QPushButton("Apply EQ");
 
+    // Style (same as before)
+    QString buttonStyle =
+        "QPushButton {"
+        "  background-color: #1f1f1f;"
+        "  color: #f0f0f0;"
+        "  border: 1px solid #2a2a2a;"
+        "  border-radius: 8px;"
+        "  padding: 10px 16px;"
+        "  font-size: 14px;"
+        "}"
+        "QPushButton:hover {"
+        "  background-color: #2a2a2a;"
+        "  border-color: #3a3a3a;"
+        "}"
+        "QPushButton:pressed {"
+        "  background-color: #181818;"
+        "}";
+
+    back->setStyleSheet(buttonStyle);
+    apply->setStyleSheet(buttonStyle);
+    back->setCursor(Qt::PointingHandCursor);
+    apply->setCursor(Qt::PointingHandCursor);
+
+    // Make buttons expand horizontally
+    back->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
+    apply->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
+
+    // Add buttons with spacing
     btns->addWidget(back);
-    btns->addStretch();
+    btns->addSpacing(20);  // Optional: space between buttons
     btns->addWidget(apply);
 
+    // Add to root layout
     root->addLayout(btns);
 
     // --- Connections ---

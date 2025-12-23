@@ -10,7 +10,7 @@ int main(int argc, char *argv[]) {
 
     MainWindow window;
     window.setWindowTitle("Audio Mixer");
-    window.setFixedSize(800,600);
+    window.setFixedSize(800,650);
     window.show();
 
     QAction *button = window.findChild<QAction*>("exitApplication");

@@ -190,6 +190,7 @@ void HomePage::loadRecentProjects()
         connect(item, &QPushButton::clicked, [this, pathStr]() {
             try {
                 addButton->setText("Loading...");
+                appData->currentAudioFile = QString::fromStdString(pathStr);
                 appData->audioData.samples = AudioLoader::loadAudio(
                     pathStr,
                     appData->audioData.sampleRate,

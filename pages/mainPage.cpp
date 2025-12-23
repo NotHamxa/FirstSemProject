@@ -1,4 +1,6 @@
 #include "mainPage.h"
+
+#include <iostream>
 #include <QVBoxLayout>
 #include <QWidget>
 #include <QFileDialog>
@@ -39,14 +41,13 @@ MainPage::MainPage(QWidget *parent) : QWidget(parent) {
     fileMenu->addAction(exitAction);
 
     // Edit Menu
-    editMenu = menuBar->addMenu("Edit");
     eqActionItem = new QAction("Eq", this);
     connect(eqActionItem, &QAction::triggered, this, &MainPage::eqAction);
-    editMenu->addAction(eqActionItem);
+    menuBar->addAction(eqActionItem);
 
     editActionItem = new QAction("Crop", this);
     connect(editActionItem, &QAction::triggered, this, &MainPage::editAction);
-    editMenu->addAction(editActionItem);
+    menuBar->addAction(editActionItem);
 
     // --- Top-Level Actions ---
     undoAction = new QAction("Undo", this);
@@ -65,9 +66,15 @@ MainPage::MainPage(QWidget *parent) : QWidget(parent) {
     // --- Title ---
     titleLabel = new QLabel("Audio Viewer", this);
     titleLabel->setAlignment(Qt::AlignCenter);
-    titleLabel->setWordWrap(true); // wrap long titles
+    titleLabel->setWordWrap(true);
+    titleLabel->setTextInteractionFlags(Qt::TextSelectableByMouse);
     titleLabel->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
-    titleLabel->setStyleSheet("font-size: 22px; font-weight: bold; max-height: 50px;");
+    titleLabel->setStyleSheet(
+        "font-size: 22px;"
+        "font-weight: bold;"
+        "max-height: 100px;"
+        "color: #ffffff;"
+    );
     mainLayout->addWidget(titleLabel);
 
     // --- Waveform Canvas ---
@@ -210,6 +217,7 @@ void MainPage::updatePage() {
     currentSample = 0;
     auto array = appData->currentAudioFile.split("/");
     titleLabel->setText(array.last());
+    std::cout <<"Title" <<array.last().toStdString() << std::endl;
     int time = appData->audioData.samples.size()/(appData->audioData.sampleRate * appData->audioData.channels);
     int minutes = time/60;
     int seconds = time%60;

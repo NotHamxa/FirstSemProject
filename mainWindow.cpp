@@ -58,8 +58,8 @@ void MainWindow::switchWindow(QString window) {
         eqPage->canvas->setSamples(eqPage->modifiedSamples);
     }
     else if (window=="crop") {
-        cropPage->canvas->setSamples(appData->audioData.samples);
         cropPage->setData(appData,history);
+        cropPage->updatePage();
         stack->setCurrentIndex(3);
     }
 }

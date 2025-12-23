@@ -43,7 +43,6 @@ private:
     QVBoxLayout *mainLayout;
     QMenuBar *menuBar;
     QMenu *fileMenu;
-    QMenu *editMenu;
 
     QAction *saveAction;
     QAction *closeAction;
