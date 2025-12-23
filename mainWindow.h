@@ -8,6 +8,7 @@
 class HomePage;
 class MainPage;
 class EqPage;
+class CropPage;
 class MainWindow : public QMainWindow {
     Q_OBJECT
 public:
@@ -20,6 +21,8 @@ private:
     HomePage *homePage;
     MainPage *mainPage;
     EqPage *eqPage;
+    CropPage *cropPage;
+
     AppData *appData;
     AudioHistory *history;
 };

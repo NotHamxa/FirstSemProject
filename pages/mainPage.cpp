@@ -44,7 +44,7 @@ MainPage::MainPage(QWidget *parent) : QWidget(parent) {
     connect(eqActionItem, &QAction::triggered, this, &MainPage::eqAction);
     editMenu->addAction(eqActionItem);
 
-    editActionItem = new QAction("Edit", this);
+    editActionItem = new QAction("Crop", this);
     connect(editActionItem, &QAction::triggered, this, &MainPage::editAction);
     editMenu->addAction(editActionItem);
 
@@ -182,7 +182,7 @@ void MainPage::eqAction() {
     changeWindow("eq");
 }
 void MainPage::editAction() {
-    QMessageBox::information(this, "Edit", "Edit clicked!");
+    changeWindow("crop");
 }
 void MainPage::onUndo() {
     if (!history->canUndo())
@@ -220,6 +220,12 @@ void MainPage::updatePage() {
     undoAction->setDisabled(!history->canUndo());
 }
 void MainPage::setCurrentSample(int index) {
+    if (index >= appData->audioData.samples.size()) {
+        playing = false;
+        player->pause();
+        playButton->setText("Play");
+        index = 0;
+    }
     int time = appData->audioData.samples.size()/(appData->audioData.sampleRate * appData->audioData.channels);
     int minutes = time/60;
     int seconds = time%60;

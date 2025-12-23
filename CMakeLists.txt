@@ -34,6 +34,8 @@ add_executable(AudioEditor
         util/eqEditor.cpp
         util/biquad.h
         structures/history.h
+        pages/cropPage.h
+        pages/cropPage.cpp
 )
 
 target_include_directories(AudioEditor PRIVATE

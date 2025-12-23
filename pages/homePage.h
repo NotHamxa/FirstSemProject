@@ -3,7 +3,6 @@
 #include <QWidget>
 #include<QPushButton>
 #include<QVBoxLayout>
-
 #include "../structures/appData.h"
 #include "../structures/history.h"
 
@@ -14,6 +13,7 @@ public:
     void setData(AppData*,AudioHistory*);
     void setChangeWindow(std::function<void(QString)> func);
     void loadRecentProjects();
+
 private:
     AppData *appData = nullptr;
     AudioHistory *history = nullptr;

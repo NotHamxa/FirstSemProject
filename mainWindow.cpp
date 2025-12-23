@@ -2,6 +2,7 @@
 #include "pages/homePage.h"
 #include "pages/mainPage.h"
 #include "pages/eqPage.h"
+#include "pages/cropPage.h"
 
 void switchToMain(QString window);
 MainWindow::MainWindow(QWidget *parent)
@@ -16,25 +17,28 @@ MainWindow::MainWindow(QWidget *parent)
     homePage = new HomePage();
     mainPage = new MainPage();
     eqPage = new EqPage();
+    cropPage = new CropPage();
+
     // Setting App Data
     homePage->setData(appData, history);
     mainPage->setData(appData, history);
     eqPage->setData(appData, history);
-
+    cropPage->setData(appData, history);
 
     // Setting switch window function
     homePage->setChangeWindow([this](QString window){switchWindow(window);});
     mainPage->setChangeWindow([this](QString window){switchWindow(window);});
     eqPage->setChangeWindow([this](QString window){switchWindow(window);});
+    cropPage->setChangeWindow([this](QString window){switchWindow(window);});
 
+    // Adding pages to stack
     stack->addWidget(homePage);
     stack->addWidget(mainPage);
     stack->addWidget(eqPage);
+    stack->addWidget(cropPage);
+
     setCentralWidget(stack);
 
-    // // Connect Settings → Home
-    // connect(settings->findChild<QPushButton*>("back"), &QPushButton::clicked,
-    //         [this](){ stack->setCurrentIndex(0); });
 }
 void MainWindow::switchWindow(QString window) {
     if (window=="home") {
@@ -52,5 +56,10 @@ void MainWindow::switchWindow(QString window) {
         eqPage->setData(appData,history);
         eqPage->modifiedSamples = appData->audioData.samples;
         eqPage->canvas->setSamples(eqPage->modifiedSamples);
+    }
+    else if (window=="crop") {
+        cropPage->canvas->setSamples(appData->audioData.samples);
+        cropPage->setData(appData,history);
+        stack->setCurrentIndex(3);
     }
 }
