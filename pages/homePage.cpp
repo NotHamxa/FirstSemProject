@@ -29,7 +29,7 @@ HomePage::HomePage(QWidget *parent) : QWidget(parent) {
 
     // Title
     QFont titleFont("Segoe UI", 28, QFont::Bold);
-    auto *title = new QLabel("Audio Mixer");
+    auto *title = new QLabel("Audio Editor");
     title->setFont(titleFont);
     title->setStyleSheet("color: #ffffff;");
     title->setAlignment(Qt::AlignCenter);

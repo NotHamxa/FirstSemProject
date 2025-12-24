@@ -9,7 +9,7 @@ class AudioPlayer : public QObject
 {
     Q_OBJECT
 public:
-    // Constructor now takes the index reference and the setter
+
     AudioPlayer(int& indexRef, std::function<void(int)> setIndexFunc, QObject* parent = nullptr)
         : QObject(parent), audioData(nullptr), device(nullptr), audioOutput(nullptr),
           currentSampleIndexRef(indexRef), setCurrentSampleIndex(setIndexFunc)

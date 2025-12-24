@@ -14,11 +14,11 @@ EqPage::EqPage(QWidget* parent)
     title->setStyleSheet("font-size: 22px; font-weight: bold;");
     root->addWidget(title);
 
-    // --- Waveform Canvas at the top ---
+    // Canvas
     canvas = new WaveformCanvas(this);
     root->addWidget(canvas);
 
-    // --- Horizontal EQ sliders ---
+    // Sliders
     auto* bands = new QHBoxLayout;
     bands->addWidget(makeBand("Low",      low));
     bands->addWidget(makeBand("Low-Mid",  lowMid));
@@ -28,12 +28,10 @@ EqPage::EqPage(QWidget* parent)
 
     root->addLayout(bands);
 
-    // --- Buttons ---
     auto* btns = new QHBoxLayout;
     auto* back = new QPushButton("Back");
     auto* apply = new QPushButton("Apply EQ");
 
-    // Style (same as before)
     QString buttonStyle =
         "QPushButton {"
         "  background-color: #1f1f1f;"
@@ -56,23 +54,20 @@ EqPage::EqPage(QWidget* parent)
     back->setCursor(Qt::PointingHandCursor);
     apply->setCursor(Qt::PointingHandCursor);
 
-    // Make buttons expand horizontally
+
     back->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
     apply->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
 
-    // Add buttons with spacing
     btns->addWidget(back);
-    btns->addSpacing(20);  // Optional: space between buttons
+    btns->addSpacing(20);
     btns->addWidget(apply);
 
-    // Add to root layout
     root->addLayout(btns);
 
-    // --- Connections ---
     connect(back, &QPushButton::clicked, this, &EqPage::onBackClicked);
     connect(apply, &QPushButton::clicked, this, &EqPage::onApplyClicked);
 
-    // --- Connect sliders to live update ---
+    // Connect Sliders
     auto updateFunc = [this]() {
         if (!appData || appData->audioData.samples.empty()) return;
 
